@@ -46,6 +46,7 @@ test<-select(test,Activity,everything())
 test<-select(test,Subject,everything())
 ## Appending test data set to the train data set to form the full data set##
 fulldataset<-rbind(train,test)
+view(fulldataset)
 ## Subsetting full dataset to only select variables with "mean" or "std" anywhere in the feature names##
 finaldataset<-select(fulldataset,Subject,Activity,matches('mean|std'))
 ## calculating average of each the "mean" and "std" variables from previous step and storing them by activity and subject in new dataframe##
@@ -55,4 +56,4 @@ summarydata<-finaldataset%>%
 ##Adding "Average" to the variables in the final dataset for readability##
 colnames(summarydata)[3:88]<-paste(colnames(summarydata)[3:88],"Average",sep=".")
 ##Writing final data set with averages to a text file for github upload##
-write.table(summarydata,"summarydata.txt")
+write.table(summarydata,"summarydata.txt",rownames=FALSE)
